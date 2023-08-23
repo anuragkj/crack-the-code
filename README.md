@@ -10,6 +10,21 @@ This is a web server that can host quizzes.
 pip install -r requirements.txt
 ```
 
+### Fix Conf URL Path
+In the virtual env: \venv\lib\site-packages\markdownx\urls.py
+
+Replace:
+
+```bash
+from django.conf.urls import url
+```
+
+With:
+
+```bash
+from django.urls import re_path as url
+```
+
 ### Make migrations
 
 ```bash
