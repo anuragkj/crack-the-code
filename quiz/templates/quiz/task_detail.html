@@ -1,0 +1,51 @@
+{% extends "quiz/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h2 class="mb-4">{{ object.name }}</h2>
+<div class="text-info">Points : {{ object.points }}</div>
+{% if not user.is_superuser %}
+{% if form.instance.value == form.instance.task.correct %}
+<div class="text-success"> Status : Complete </div>
+<span class="text-success"> Key : </span>
+<span class="badge badge-primary badge-pill">
+  <i class="fas fa-lock-open">{{ task.key }}</i>  
+</span>
+{% else %}
+<div class="text-danger mb-4"> Status : Incomplete </div>
+{% endif %}
+{% endif %}
+<div class="row">
+  <div class="col">
+    <article class="media content-section">
+      <div class="media-body">
+        {% if user.is_superuser %}
+        <div><b>Answer</b> : {{ task.correct }}</div>
+        {% endif %}
+        <p class="article-content">{{ object.formatted_markdown|safe }}</p>
+        <!-- {% if form.instance.value != form.instance.task.correct and not user.is_superuser%}
+        <a href="{% url 'show-hint' task.id %}">Show Hint</a>
+        <br>
+        (Point penalty: <b>{{ task.hint_points }}</b> everytime you take this hint, so be careful!!)
+        {% endif %} -->
+      </div>
+    </article>
+  </div>
+  {% if form.instance.value != form.instance.task.correct and not user.is_superuser%}
+  <div class="col-md-4">
+    <div class="content-section d-flex flex-column justify-content-between">
+      <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+          <legend class="border-bottom mb-4">Answer</legend>
+          {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+          <button class="btn btn-outline-info" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock content %}
