@@ -22,11 +22,11 @@
         <div><b>Answer</b> : {{ task.correct }}</div>
         {% endif %}
         <p class="article-content">{{ object.formatted_markdown|safe }}</p>
-        <!-- {% if form.instance.value != form.instance.task.correct and not user.is_superuser%}
+        {% if form.instance.value != form.instance.task.correct and not user.is_superuser%}
         <a href="{% url 'show-hint' task.id %}">Show Hint</a>
         <br>
-        (Point penalty: <b>{{ task.hint_points }}</b> everytime you take this hint, so be careful!!)
-        {% endif %} -->
+        (Time penalty: <b>{{ task.hint_points }}</b> minutes will be added everytime you take this hint, so be careful!!)
+        {% endif %}
       </div>
     </article>
   </div>

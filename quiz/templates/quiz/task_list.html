@@ -13,7 +13,7 @@
             </thead>
             <tbody>
                 {% for task in tasks %}
-                {% if task.serial|divide <=  card.score|user_set %}
+                {% if user.is_superuser or task.serial|divide <=  card.score|user_set %}
                     <tr>
                         <td><a class="article-title" href="{% url 'task-detail' task.id %} " style="color: blue;">{{ task.name }}</a></td>
                         <td>Chapter {{ task.serial|divide }}</td>
