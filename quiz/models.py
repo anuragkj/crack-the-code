@@ -5,7 +5,7 @@ from django.db.models import F, Sum, Max
 from django.urls import reverse
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
-from datetime import datetime
+from datetime import datetime, timedelta
 
 class Task(models.Model):
     serial = models.IntegerField(default=0)
@@ -34,7 +34,7 @@ class Card(models.Model):
         score = self.answer_set.filter(value=F('task__correct')).aggregate(score=Sum('task__points')).get('score')
         if score is None:
             score = 0
-        score -= self.penalty_points
+        # score -= self.penalty_points
         return score
 
     @property
@@ -43,7 +43,7 @@ class Card(models.Model):
         if last_time is None:
             return None
         
-        return str(last_time - self.start)
+        return str(last_time - self.start + timedelta(minutes=self.penalty_points))
 
 
 class Answer(models.Model):
