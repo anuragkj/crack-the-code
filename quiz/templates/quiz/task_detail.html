@@ -5,11 +5,7 @@
 <div class="text-info">Points : {{ object.points }}</div>
 {% if not user.is_superuser %}
 {% if form.instance.value == form.instance.task.correct %}
-<div class="text-success"> Status : Complete </div>
-<span class="text-success"> Key : </span>
-<span class="badge badge-primary badge-pill">
-  <i class="fas fa-lock-open">{{ task.key }}</i>  
-</span>
+<div class="text-success mb-4"> Status : Complete </div>
 {% else %}
 <div class="text-danger mb-4"> Status : Incomplete </div>
 {% endif %}
@@ -25,7 +21,7 @@
         {% if form.instance.value != form.instance.task.correct and not user.is_superuser%}
         <a href="{% url 'show-hint' task.id %}">Show Hint</a>
         <br>
-        (Time penalty: <b>{{ task.hint_points }}</b> minutes will be added everytime you take this hint, so be careful!!)
+        (Point penalty: <b>{{ task.hint_points }}</b> everytime you take this hint, so be careful!! Note: Avoid opening the same hint twice -> you will be deducted each time you open it.)
         {% endif %}
       </div>
     </article>
@@ -33,7 +29,7 @@
   {% if form.instance.value != form.instance.task.correct and not user.is_superuser%}
   <div class="col-md-4">
     <div class="content-section d-flex flex-column justify-content-between">
-      <form method="POST">
+      <form method="POST" autocomplete="off">
         {% csrf_token %}
         <fieldset class="form-group">
           <legend class="border-bottom mb-4">Answer</legend>
