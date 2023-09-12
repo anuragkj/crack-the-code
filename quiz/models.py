@@ -6,6 +6,7 @@ from django.urls import reverse
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 from datetime import datetime, timedelta
+from django.utils import timezone 
 
 class Task(models.Model):
     serial = models.IntegerField(default=0)
@@ -51,6 +52,8 @@ class Answer(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     value = models.CharField(max_length=256)
     submit = models.DateTimeField(auto_now=True)
+    time_submitted = models.DateTimeField(auto_now=True)
+
 
     class Meta:
         unique_together = (('card', 'task'),)

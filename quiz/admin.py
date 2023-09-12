@@ -15,5 +15,6 @@ class CardAdmin(MarkdownxModelAdmin):
 
 @admin.register(Answer)
 class AnswerAdmin(MarkdownxModelAdmin):
-    fields = ('card', 'task', 'value',)
-    list_display = ('card', 'task', 'value',)
+    fields = ('card', 'task', 'value')
+    ordering = ('-time_submitted',)
+    list_display = ('card', 'task', 'value','time_submitted')
