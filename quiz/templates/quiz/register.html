@@ -5,16 +5,17 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Register</legend>
+                <legend class="border-bottom mb-4">Team Registration</legend>
+                <p><em>NOTE: This account will be used by all the members of your team</em></p>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                <button class="btn btn-outline-warning" type="submit">Sign Up</button>
             </div>
         </form>
         <div class="border-top pt-3">
             <small class="text-muted">
-                Continuing your Progress? <a class="ml-2" href="{% url 'login' %}">Log In</a>
+                Already Registed or not a team leader? <a class="ml-2" href="{% url 'login' %}">Log In</a>
             </small>
         </div>
     </div>

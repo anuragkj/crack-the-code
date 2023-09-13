@@ -22,7 +22,7 @@ class PlayerListView(LoginRequiredMixin, ListView):
 class PlayerCreateView(LoginRequiredMixin, CreateView):
     model = Player
     fields = ['name', 'institute_id', 'contact']
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('player-list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
