@@ -2,7 +2,7 @@
 {% block content %}
 {% if leaderboard %}
 <h2 class="article-title mb-4">Leaderboard</h2>
-<table class="table table-bordered table-hover table-light">
+<table class="table table-bordered table-hover table-dark">
     <thead>
         <tr>
             <th>#</th>
@@ -13,7 +13,7 @@
     </thead>
     <tbody>
         {% for card in leaderboard %}
-            <tr {% if user == card.user %} class="table-success" {% endif %}>
+            <tr {% if user == card.user %} class="table-success" style="color:var(--gray-dark)" {% endif %}>
                 <td>{{ forloop.counter }}</td>
                 <td>{{ card.user.username }}</td>
                 <td>{{ card.score }}</td>

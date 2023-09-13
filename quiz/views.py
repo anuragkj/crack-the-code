@@ -10,7 +10,7 @@ from django.views.generic import (
 from .forms import UserRegisterForm, AnswerForm
 from .models import Task, Card, Answer
 from django.views.generic.edit import FormMixin
-
+from quiz.templatetags.my_custom_filters import divide, user_set
 
 @login_required
 def home(request):
@@ -72,7 +72,11 @@ class TaskDetailView(LoginRequiredMixin, UserPassesTestMixin, FormMixin, DetailV
         check = self.request.user.is_superuser or self.request.user.player_set.count() > 0
         if not check:
             messages.warning(self.request, f'Please enter the player details before attempting the challenge')
-        return check
+            return check
+        check2 = self.request.user.is_superuser or divide(self.get_object().serial) <=  user_set(self.request.user.card.score)
+        if not check2:
+            messages.warning(self.request, f'Question blocked')
+        return check2
 
     def handle_no_permission(self):
         return redirect('player-list')

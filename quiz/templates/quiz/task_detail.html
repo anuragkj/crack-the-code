@@ -19,9 +19,9 @@
         {% endif %}
         <p class="article-content">{{ object.formatted_markdown|safe }}</p>
         {% if form.instance.value != form.instance.task.correct and not user.is_superuser%}
-        <a href="{% url 'show-hint' task.id %}">Show Hint</a>
+        <a href="{% url 'show-hint' task.id %}">Get Help</a>
         <br>
-        (Point penalty: <b>{{ task.hint_points }}</b> everytime you take this hint, so be careful!! Note: Avoid opening the same hint twice -> you will be deducted each time you open it.)
+        (Time penalty of <b>{{ task.hint_points }}</b> minutes everytime you take this hint, so be careful!! Note: Avoid opening the same hint twice -> you will be deducted each time you open it.)
         {% endif %}
       </div>
     </article>
@@ -43,5 +43,12 @@
   </div>
   {% endif %}
 </div>
+
+<script>
+  let tagArr = document.getElementsByTagName("input");
+  for (let i = 0; i < tagArr.length; i++) {
+    tagArr[i].autocomplete = 'off';
+  }
+</script>
 
 {% endblock content %}

@@ -1,9 +1,10 @@
 {% extends "quiz/base.html" %}
 {% block content %}
-    <h2>Player Info</h2>
+    <h2>Team Players Info</h2>
     <div class="content-section">
-        <p>This information is taken to get in touch with exceptional players like you!</p>
-        <p>Click on `New` to add your details.</p>
+        <p>Add in all your team members before beginning so we can get in touch with you!</p>
+        <p>Click on `New` to add your team's details.</p>
+        <p>Team size: 1-3 vault crackers</p>
     </div>
     {% for player in players %}
         <div class="media-body mb-4 mt-4 d-flex bd-highlight border justify-content-between">
@@ -15,15 +16,16 @@
         </div>
     {% endfor %}
 
-    {% if players|length < 1%}
+    {% if players|length < 3%}
         <a href="{% url 'player-create' %}">
             <button class="btn btn-outline-primary">
-                New
+                + New
             </button>
         </a>
-    {% else %}
+    {% endif%}
+    {% if players|length >= 1%}
         <a href="{% url 'home' %}">
-            <button class="btn btn-outline-primary">
+            <button class="btn btn-outline-warning">
                 Home
             </button>
         </a>
