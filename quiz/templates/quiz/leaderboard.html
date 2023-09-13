@@ -13,7 +13,7 @@
     </thead>
     <tbody>
         {% for card in leaderboard %}
-            <tr {% if user == card.user %} class="table-success" {% endif %}>
+            <tr {% if user == card.user %} class="table-success" style="color:var(--gray-dark)" {% endif %}>
                 <td>{{ forloop.counter }}</td>
                 <td>{{ card.user.username }}</td>
                 <td>{{ card.score }}</td>
